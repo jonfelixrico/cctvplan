@@ -1,0 +1,12 @@
+{
+  "name": "@cctvplan/components",
+  "version": "0.0.1",
+  "private": true,
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "nx": {
+    "name": "components",
+    "projectType": "application",
+    "sourceRoot": "libs/components/src"
+  }
+}
