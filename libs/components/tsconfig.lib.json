@@ -2,9 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "out-tsc/components",
-    "types": [
-      "vite/client"
-    ],
+    "types": ["vite/client"],
     "rootDir": "src",
     "jsx": "preserve",
     "jsxImportSource": "vue",
@@ -20,9 +18,5 @@
     "src/**/*.tsx",
     "src/**/*.vue"
   ],
-  "exclude": [
-    "eslint.config.js",
-    "eslint.config.cjs",
-    "eslint.config.mjs"
-  ]
+  "exclude": ["eslint.config.js", "eslint.config.cjs", "eslint.config.mjs"]
 }
