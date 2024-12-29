@@ -2,7 +2,10 @@
   "name": "@cctvplan/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\""
+  },
   "private": true,
   "dependencies": {},
   "devDependencies": {
