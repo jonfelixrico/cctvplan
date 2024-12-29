@@ -5,6 +5,10 @@
   "references": [
     {
       "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.storybook.json"
     }
-  ]
+  ],
+  "exclude": ["**/*.stories.ts", "**/*.stories.js"]
 }

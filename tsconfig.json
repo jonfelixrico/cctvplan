@@ -9,5 +9,10 @@
     {
       "path": "./libs/components"
     }
-  ]
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
 }
