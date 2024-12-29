@@ -49,3 +49,5 @@ Thumbs.db
 .cache
 
 tsconfig.tsbuildinfo
+vite.config.*.timestamp*
+vitest.config.*.timestamp*
