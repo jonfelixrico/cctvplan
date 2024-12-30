@@ -16,9 +16,9 @@ const meta: Meta<typeof FovCone> = {
   // Define default args
   args: {
     distances: [50, 50, 50],
-    viewingAngle: Math.PI / 2, // 90 degrees
+    viewingAngle: 90, // degrees (was Math.PI/2)
     rotation: 0,
-    origin: { x: 0, y: 0 },
+    origin: { x: 200, y: 200 },
   },
 }
 
@@ -31,7 +31,7 @@ export const Default: Story = {}
 // Wide angle cone
 export const WideAngle: Story = {
   args: {
-    viewingAngle: Math.PI * 0.75, // 135 degrees
+    viewingAngle: 135, // degrees (was Math.PI * 0.75)
     distances: [60, 60],
     origin: { x: 0, y: 0 },
   },
@@ -40,7 +40,7 @@ export const WideAngle: Story = {
 // Narrow angle cone
 export const NarrowAngle: Story = {
   args: {
-    viewingAngle: Math.PI / 4, // 45 degrees
+    viewingAngle: 45, // degrees (was Math.PI/4)
     distances: [80, 40, 40],
     origin: { x: 0, y: 0 },
   },
@@ -49,7 +49,7 @@ export const NarrowAngle: Story = {
 // Rotated cone
 export const Rotated: Story = {
   args: {
-    rotation: Math.PI / 4, // 45 degrees
+    rotation: 45, // degrees (was Math.PI/4)
     distances: [70, 50],
     origin: { x: 0, y: 0 },
   },
