@@ -25,24 +25,28 @@ function getLeftRightPoints(distance: number): LeftRightPoints {
   const rightAngle = rotation + viewingAngle / 2
 
   const left = {
-    x: origin.x + distance * Math.cos(leftAngle),
-    y: origin.y + distance * Math.sin(leftAngle),
+    x: origin.x + distance * Math.cos(leftAngle * (Math.PI / 180)),
+    y: origin.y + distance * Math.sin(leftAngle * (Math.PI / 180)),
   }
 
   const right = {
-    x: origin.x + distance * Math.cos(rightAngle),
-    y: origin.y + distance * Math.sin(rightAngle),
+    x: origin.x + distance * Math.cos(rightAngle * (Math.PI / 180)),
+    y: origin.y + distance * Math.sin(rightAngle * (Math.PI / 180)),
   }
 
   return { left, right }
 }
 
-function getSvgPath({ left, right }: LeftRightPoints): string {
+function getSvgPath(
+  { left, right }: LeftRightPoints,
+  distance: number,
+): string {
   const { origin } = props
+
   return [
     `M ${origin.x} ${origin.y}`,
     `L ${left.x} ${left.y}`,
-    `A 60 60 0 0 1 ${right.x} ${right.y}`,
+    `A ${distance} ${distance} 0 0 1 ${right.x} ${right.y}`,
     'Z',
   ].join('')
 }
@@ -66,8 +70,7 @@ const leftRightPoints = computed(() => {
   <path
     v-for="(pair, index) in leftRightPoints"
     :key="index"
-    :d="getSvgPath(pair)"
-    stroke="gray"
-    stroke-width="2"
+    :d="getSvgPath(pair, distances[index])"
+    fill="gray"
   />
 </template>
