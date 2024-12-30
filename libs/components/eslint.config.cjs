@@ -1,5 +1,5 @@
-const vue = require('eslint-plugin-vue');
-const baseConfig = require('../../eslint.config.cjs');
+const vue = require('eslint-plugin-vue')
+const baseConfig = require('../../eslint.config.cjs')
 
 module.exports = [
   ...baseConfig,
@@ -16,6 +16,7 @@ module.exports = [
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.vue'],
     rules: {
       'vue/multi-word-component-names': 'off',
+      'vue/max-attributes-per-line': 'off',
     },
   },
-];
+]
