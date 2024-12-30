@@ -21,8 +21,8 @@ interface LeftRightPoints {
 function getLeftRightPoints(distance: number): LeftRightPoints {
   const { viewingAngle, rotation, origin } = props
 
-  const leftAngle = rotation - viewingAngle / 2
-  const rightAngle = rotation + viewingAngle / 2
+  const rightAngle = rotation - 90 + viewingAngle / 2
+  const leftAngle = rotation - 90 - viewingAngle / 2
 
   const left = {
     x: origin.x + distance * Math.cos(leftAngle * (Math.PI / 180)),
