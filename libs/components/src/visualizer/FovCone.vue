@@ -18,20 +18,31 @@ interface LeftRightPoints {
   right: Point
 }
 
+/**
+ * Converts degrees to radians.
+ * JavaScript's Math.sin() and Math.cos() functions expect angles in radians,
+ * but we use degrees in our API for better developer experience since degrees
+ * are more intuitive to work with (0-360 vs 0-2π).
+ */
+function degreesToRadians(degrees: number): number {
+  return degrees * (Math.PI / 180)
+}
+
 function getLeftRightPoints(distance: number): LeftRightPoints {
   const { viewingAngle, rotation, origin } = props
 
+  // Subtract 90 degrees to align with SVG coordinate system where 0° points right
   const rightAngle = rotation - 90 + viewingAngle / 2
   const leftAngle = rotation - 90 - viewingAngle / 2
 
   const left = {
-    x: origin.x + distance * Math.cos(leftAngle * (Math.PI / 180)),
-    y: origin.y + distance * Math.sin(leftAngle * (Math.PI / 180)),
+    x: origin.x + distance * Math.cos(degreesToRadians(leftAngle)),
+    y: origin.y + distance * Math.sin(degreesToRadians(leftAngle)),
   }
 
   const right = {
-    x: origin.x + distance * Math.cos(rightAngle * (Math.PI / 180)),
-    y: origin.y + distance * Math.sin(rightAngle * (Math.PI / 180)),
+    x: origin.x + distance * Math.cos(degreesToRadians(rightAngle)),
+    y: origin.y + distance * Math.sin(degreesToRadians(rightAngle)),
   }
 
   return { left, right }
