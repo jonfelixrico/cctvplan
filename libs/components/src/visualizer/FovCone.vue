@@ -47,6 +47,19 @@ function getLeftRightPoints(distance: number): LeftRightPoints {
 
   return { left, right }
 }
+const leftRightPoints = computed(() => {
+  const { distances } = props
+
+  const pairs: LeftRightPoints[] = []
+
+  let distanceSum = 0
+  for (const distance of distances) {
+    distanceSum += distance
+    pairs.push(getLeftRightPoints(distanceSum))
+  }
+
+  return pairs
+})
 
 function getSvgPath(
   { left, right }: LeftRightPoints,
@@ -61,20 +74,6 @@ function getSvgPath(
     'Z',
   ].join('')
 }
-
-const leftRightPoints = computed(() => {
-  const { distances } = props
-
-  const pairs: LeftRightPoints[] = []
-
-  let distanceSum = 0
-  for (const distance of distances) {
-    distanceSum += distance
-    pairs.push(getLeftRightPoints(distanceSum))
-  }
-
-  return pairs
-})
 </script>
 
 <template>
