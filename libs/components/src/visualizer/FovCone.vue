@@ -47,24 +47,27 @@ function getLeftRightPoints(distance: number): LeftRightPoints {
 
   return { left, right }
 }
-const leftRightPoints = computed(() => {
+
+type Segment = LeftRightPoints & { distance: number }
+
+const segments = computed(() => {
   const { distances } = props
 
-  const pairs: LeftRightPoints[] = []
+  const segments: Segment[] = []
 
   let distanceSum = 0
   for (const distance of distances) {
     distanceSum += distance
-    pairs.push(getLeftRightPoints(distanceSum))
+    segments.push({
+      ...getLeftRightPoints(distanceSum),
+      distance: distanceSum,
+    })
   }
 
-  return pairs
+  return segments
 })
 
-function getSvgPath(
-  { left, right }: LeftRightPoints,
-  distance: number,
-): string {
+function getInitialPath({ left, right, distance }: Segment): string {
   const { origin } = props
 
   return [
@@ -74,13 +77,30 @@ function getSvgPath(
     'Z',
   ].join('')
 }
+
+function getSucceedingPath(prev: Segment, current: Segment) {
+  return [
+    `M ${prev.left.x} ${prev.left.y}`,
+    `L ${current.left.x} ${current.left.y}`,
+    `A ${current.distance} ${current.distance} 0 0 1 ${current.right.x} ${current.right.y}`,
+    `L ${prev.right.x} ${prev.right.y}`,
+    `A ${prev.distance} ${prev.distance} 0 0 1 ${prev.left.x} ${prev.left.y}`,
+    'Z',
+  ].join('')
+}
 </script>
 
 <template>
-  <path
-    v-for="(pair, index) in leftRightPoints"
-    :key="index"
-    :d="getSvgPath(pair, distances[index])"
-    fill="gray"
-  />
+  <template v-for="(segment, index) in segments" :key="index">
+    <path
+      v-if="index === 0"
+      :d="getInitialPath(segment)"
+      :fill="index % 2 === 0 ? 'red' : 'blue'"
+    />
+    <path
+      v-else
+      :d="getSucceedingPath(segments[index - 1], segment)"
+      :fill="index % 2 === 0 ? 'red' : 'blue'"
+    />
+  </template>
 </template>
