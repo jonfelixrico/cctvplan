@@ -84,7 +84,7 @@ function getSucceedingPath(prev: Segment, current: Segment) {
     `L ${current.left.x} ${current.left.y}`,
     `A ${current.distance} ${current.distance} 0 0 1 ${current.right.x} ${current.right.y}`,
     `L ${prev.right.x} ${prev.right.y}`,
-    `A ${prev.distance} ${prev.distance} 0 0 1 ${prev.left.x} ${prev.left.y}`,
+    `A ${prev.distance} ${prev.distance} 0 0 0 ${prev.left.x} ${prev.left.y}`,
     'Z',
   ].join('')
 }
