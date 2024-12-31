@@ -15,10 +15,14 @@ const meta: Meta<typeof FovCone> = {
   ],
   // Define default args
   args: {
-    distances: [50, 50, 50],
-    viewingAngle: 90, // degrees (was Math.PI/2)
+    segments: [
+      { distance: 50, color: 'rgba(255, 0, 0, 0.5)' },
+      { distance: 50, color: 'rgba(0, 255, 0, 0.5)' },
+      { distance: 50, color: 'rgba(0, 0, 255, 0.5)' },
+    ],
+    viewingAngle: 90,
     rotation: 0,
-    origin: { x: 200, y: 200 },
+    origin: { x: 0, y: 0 },
   },
 }
 
@@ -31,34 +35,40 @@ export const Default: Story = {}
 // Wide angle cone
 export const WideAngle: Story = {
   args: {
-    viewingAngle: 135, // degrees (was Math.PI * 0.75)
-    distances: [60, 60],
-    origin: { x: 0, y: 0 },
+    viewingAngle: 135,
+    segments: [
+      { distance: 60, color: 'rgba(255, 0, 0, 0.5)' },
+      { distance: 60, color: 'rgba(0, 255, 0, 0.5)' },
+    ],
   },
 }
 
 // Narrow angle cone
 export const NarrowAngle: Story = {
   args: {
-    viewingAngle: 45, // degrees (was Math.PI/4)
-    distances: [80, 40, 40],
-    origin: { x: 0, y: 0 },
+    viewingAngle: 45,
+    segments: [
+      { distance: 80, color: 'rgba(255, 0, 0, 0.5)' },
+      { distance: 40, color: 'rgba(0, 255, 0, 0.5)' },
+      { distance: 40, color: 'rgba(0, 0, 255, 0.5)' },
+    ],
   },
 }
 
 // Rotated cone
 export const Rotated: Story = {
   args: {
-    rotation: 45, // degrees (was Math.PI/4)
-    distances: [70, 50],
-    origin: { x: 0, y: 0 },
+    rotation: 45,
+    segments: [
+      { distance: 70, color: 'rgba(255, 0, 0, 0.5)' },
+      { distance: 50, color: 'rgba(0, 255, 0, 0.5)' },
+    ],
   },
 }
 
-// Single distance cone
-export const SingleDistance: Story = {
+// Single segment cone
+export const SingleSegment: Story = {
   args: {
-    distances: [100],
-    origin: { x: 0, y: 0 },
+    segments: [{ distance: 100, color: 'rgba(255, 0, 0, 0.5)' }],
   },
 }

@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+interface Segment {
+  distance: number
+  color: string
+}
+
 const props = defineProps<{
-  distances: number[]
+  segments: Segment[]
   viewingAngle: number
   rotation: number
   origin: Point
@@ -48,12 +53,12 @@ function getLeftRightPoints(distance: number): LeftRightPoints {
   return { left, right }
 }
 
-type Segment = LeftRightPoints & { distance: number }
+type ComputedSegment = LeftRightPoints & { distance: number }
 
-const segments = computed(() => {
-  const { distances } = props
+const computedSegments = computed(() => {
+  const distances = props.segments.map((s) => s.distance)
 
-  const segments: Segment[] = []
+  const segments: ComputedSegment[] = []
 
   let distanceSum = 0
   for (const distance of distances) {
@@ -67,7 +72,7 @@ const segments = computed(() => {
   return segments
 })
 
-function getInitialPath({ left, right, distance }: Segment): string {
+function getInitialPath({ left, right, distance }: ComputedSegment): string {
   const { origin } = props
 
   return [
@@ -78,7 +83,7 @@ function getInitialPath({ left, right, distance }: Segment): string {
   ].join('')
 }
 
-function getSucceedingPath(prev: Segment, current: Segment) {
+function getSucceedingPath(prev: ComputedSegment, current: ComputedSegment) {
   return [
     `M ${prev.left.x} ${prev.left.y}`,
     `L ${current.left.x} ${current.left.y}`,
@@ -91,16 +96,17 @@ function getSucceedingPath(prev: Segment, current: Segment) {
 </script>
 
 <template>
-  <template v-for="(segment, index) in segments" :key="index">
+  <template v-for="(segment, index) in computedSegments" :key="index">
     <path
       v-if="index === 0"
       :d="getInitialPath(segment)"
-      :fill="index % 2 === 0 ? 'red' : 'blue'"
+      :fill="segments[index].color"
     />
+
     <path
       v-else
-      :d="getSucceedingPath(segments[index - 1], segment)"
-      :fill="index % 2 === 0 ? 'red' : 'blue'"
+      :d="getSucceedingPath(computedSegments[index - 1], segment)"
+      :fill="segments[index].color"
     />
   </template>
 </template>
