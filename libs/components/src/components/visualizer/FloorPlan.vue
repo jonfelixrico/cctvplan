@@ -37,10 +37,20 @@ const points = computed(() => {
 })
 
 const svgPaths = computed(() => {
-  return points.value.map(({ x, y }) => `L ${x},${y}`).join(' ')
+  const commands: string[] = ['M 0 0']
+
+  for (const { x, y } of points.value) {
+    commands.push(`L ${x},${y}`)
+  }
+
+  commands.push('Z')
+
+  return commands.join(' ')
 })
 
-const edges = computed(() => {
+const STROKE = 2
+
+const viewBox = computed(() => {
   let xMin = 0
   let xMax = 0
   let yMin = 0
@@ -61,30 +71,25 @@ const edges = computed(() => {
     }
   }
 
-  return {
-    min: { x: xMin, y: yMin },
-    max: { x: xMax, y: yMax },
-    width: xMax - xMin,
-    height: yMax - yMin,
-  }
-})
+  return [
+    // x y
+    xMin - STROKE / 2,
+    yMin - STROKE / 2,
 
-const STROKE = 1
+    /*
+     * width height
+     *
+     * We're doing STROKE instead of STROKE / 2 since we have to compensate for the TL offset
+     * that we've done above
+     */
+    xMax - xMin + STROKE,
+    yMax - yMin + STROKE,
+  ].join(' ')
+})
 </script>
 
 <template>
-  <svg
-    :width="edges.width + STROKE * 2"
-    :height="edges.height + STROKE * 2"
-    :viewBox="
-      [
-        edges.min.x - STROKE,
-        edges.min.y - STROKE,
-        edges.max.x + STROKE,
-        edges.max.y + STROKE,
-      ].join(' ')
-    "
-  >
-    <path stroke="black" :stroke-width="STROKE" :d="svgPaths" />
+  <svg :viewBox>
+    <path stroke="black" :stroke-width="STROKE" :d="svgPaths" fill="none" />
   </svg>
 </template>
