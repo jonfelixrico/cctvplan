@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { Point } from '@/utils/geom.types'
 
 interface Segment {
   distance: number
@@ -12,11 +13,6 @@ const props = defineProps<{
   rotation: number
   origin: Point
 }>()
-
-interface Point {
-  x: number
-  y: number
-}
 
 interface LeftRightPoints {
   left: Point
