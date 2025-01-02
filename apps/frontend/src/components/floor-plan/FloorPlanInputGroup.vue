@@ -10,20 +10,16 @@ const innerModel = reactive<WallSegment>({
   distance: 5,
 })
 
-function setSegment(index: number, forPatch: Partial<WallSegment>) {
-  const clone = [...segments.value]
-  clone[index] = { ...clone[index], ...forPatch }
-  segments.value = clone
+function patchSegment(index: number, forPatch: Partial<WallSegment>) {
+  segments.value[index] = { ...segments.value[index], ...forPatch }
 }
 
 function addSegment() {
-  segments.value = [...segments.value, { ...innerModel }]
+  segments.value.push({ ...innerModel })
 }
 
 function removeSegment(index: number) {
-  const clone = [...segments.value]
-  clone.splice(index, 1)
-  segments.value = clone
+  segments.value.splice(index, 1)
 }
 </script>
 
@@ -34,8 +30,8 @@ function removeSegment(index: number) {
       :key="idx"
       :distance="segment.distance"
       :direction="segment.direction"
-      @update:distance="setSegment(idx, { distance: $event })"
-      @update:direction="setSegment(idx, { direction: $event })"
+      @update:distance="patchSegment(idx, { distance: $event })"
+      @update:direction="patchSegment(idx, { direction: $event })"
     >
       <template #left>
         <div>{{ idx + 1 }}</div>
