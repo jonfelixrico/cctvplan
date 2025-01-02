@@ -38,7 +38,19 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: [],
+
+      /*
+       * Without this, the component will not be reactive when used in other projects.
+       *
+       * Vue's reactivity system requires a single shared instance - if a library bundles its own Vue,
+       * reactivity breaks between app and library components.
+       */
+      external: ['vue'],
+      output: {
+        globals: {
+          vue: 'Vue',
+        },
+      },
     },
   },
 })
