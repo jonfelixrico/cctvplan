@@ -14,9 +14,6 @@ export default defineNuxtConfig({
 
   typescript: {
     typeCheck: true,
-    tsConfig: {
-      extends: '../tsconfig.app.json', // Nuxt copies this string as-is to the `./.nuxt/tsconfig.json`, therefore it needs to be relative to that directory
-    },
   },
 
   imports: {

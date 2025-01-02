@@ -72,5 +72,8 @@
     "serve*": {
       "dependsOn": ["^build"]
     }
+  },
+  "sync": {
+    "applyChanges": false
   }
 }
