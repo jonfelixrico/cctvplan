@@ -63,9 +63,10 @@
       }
     }
   ],
-  "targetDependencies": {
+  "targetDefaults": {
     "build*": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "cache": true
     },
 
     "serve*": {
