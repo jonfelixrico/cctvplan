@@ -92,14 +92,16 @@ const viewBox = computed(() => {
 </script>
 
 <template>
-  <svg :viewBox="viewBox">
+  <svg
+    :viewBox="viewBox"
+    :width="viewBoxData.width"
+    :height="viewBoxData.height"
+  >
     <path
       stroke="black"
       :stroke-width="strokeWidth"
       :d="svgPaths"
       fill="none"
-      :width="viewBoxData.width"
-      :height="viewBoxData.height"
     />
   </svg>
 </template>
