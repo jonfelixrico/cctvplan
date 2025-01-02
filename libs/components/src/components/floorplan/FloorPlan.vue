@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { WallSegment } from '@/components/floorplan/types'
+import { WallSegment } from './utils'
 import { Point } from '@/utils/geom.types'
 import { computed } from 'vue'
 
