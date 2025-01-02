@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { FloorSegment } from '@/components/floorplan/types'
+import { WallSegment } from '@/components/floorplan/types'
 import { Point } from '@/utils/geom.types'
 import { computed } from 'vue'
 
 const props = defineProps<{
-  segments: FloorSegment[]
+  segments: WallSegment[]
 }>()
 
 const points = computed(() => {
