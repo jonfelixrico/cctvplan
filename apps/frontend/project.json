@@ -9,7 +9,7 @@
       "options": {
         "commands": [
           "nx serve frontend",
-          "nx watch --projects=${projectName} --includeDependentProjects -- nx run-many -t build -p $NX_PROJECT_NAME --exclude=${projectName}"
+          "nx watch --projects=frontend --includeDependentProjects -- nx run-many -t build -p $NX_PROJECT_NAME --exclude=frontend"
         ]
       }
     }
