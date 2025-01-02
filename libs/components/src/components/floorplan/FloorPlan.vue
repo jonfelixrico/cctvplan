@@ -72,13 +72,10 @@ const viewBoxData = computed(() => {
   }
 
   return {
-    // x y
     x: xMin - props.strokeWidth / 2,
     y: yMin - props.strokeWidth / 2,
 
     /*
-     * width height
-     *
      * We're doing STROKE instead of STROKE / 2 since we have to compensate for the TL offset
      * that we've done above
      */
