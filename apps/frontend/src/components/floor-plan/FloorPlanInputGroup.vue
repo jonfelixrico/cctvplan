@@ -10,24 +10,6 @@ const innerModel = reactive<WallSegment>({
   distance: 5,
 })
 
-watch(
-  () => segments.value?.[segments.value.length - 1],
-  (lastSegment) => {
-    if (!lastSegment) {
-      innerModel.distance = 5
-      innerModel.direction = 'up'
-      return
-    }
-
-    const { direction, distance } = lastSegment
-    innerModel.direction = direction
-    innerModel.distance = distance
-  },
-  {
-    immediate: true,
-  },
-)
-
 function setSegment(index: number, forPatch: Partial<WallSegment>) {
   const clone = [...segments.value]
   clone[index] = { ...clone[index], ...forPatch }
@@ -35,7 +17,7 @@ function setSegment(index: number, forPatch: Partial<WallSegment>) {
 }
 
 function addSegment() {
-  segments.value.push(innerModel)
+  segments.value.push({ ...innerModel })
 }
 
 function removeSegment(index: number) {
