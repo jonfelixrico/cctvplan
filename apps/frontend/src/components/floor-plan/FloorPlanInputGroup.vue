@@ -2,7 +2,7 @@
 import { type WallSegment } from '@cctvplan/components'
 
 const segments = defineModel<WallSegment[]>({
-  default: [],
+  required: true,
 })
 
 const innerModel = reactive<WallSegment>({
@@ -33,24 +33,46 @@ function setSegment(index: number, forPatch: Partial<WallSegment>) {
   clone[index] = { ...clone[index], ...forPatch }
   segments.value = clone
 }
+
+function addSegment() {
+  segments.value.push(innerModel)
+}
+
+function removeSegment(index: number) {
+  segments.value.splice(index, 1)
+}
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <!-- Using index as key seems to be fucked with this rule -->
-    <!-- eslint-disable-next-line vue/valid-v-for -->
-    <div v-for="(segment, idx) of segments" :key="idx">
-      <FloorPlanInput
-        :distance="segment.distance"
-        :direction="segment.direction"
-        @update:distance="setSegment(idx, { distance: $event })"
-        @update:direction="setSegment(idx, { direction: $event })"
-      />
-    </div>
-
+  <div class="grid grid-cols-[auto_1fr_auto] gap-y-3">
     <FloorPlanInput
       v-model:distance="innerModel.distance"
       v-model:direction="innerModel.direction"
-    />
+    >
+      <template #right>
+        <UButton block @click="addSegment">Add</UButton>
+      </template>
+
+      <template #left>
+        <div>New</div>
+      </template>
+    </FloorPlanInput>
+
+    <FloorPlanInput
+      v-for="(segment, idx) of segments"
+      :key="idx"
+      :distance="segment.distance"
+      :direction="segment.direction"
+      @update:distance="setSegment(idx, { distance: $event })"
+      @update:direction="setSegment(idx, { direction: $event })"
+    >
+      <template #left>
+        <div>{{ idx + 1 }}</div>
+      </template>
+
+      <template #right>
+        <UButton block @click="removeSegment(idx)">Remove</UButton>
+      </template>
+    </FloorPlanInput>
   </div>
 </template>

@@ -1,18 +1,43 @@
 <script setup lang="ts">
-import { WallSegment } from '@cctvplan/components'
+import type { WallSegment } from '@cctvplan/components'
 
-defineModel<number>('distance')
-defineModel<WallSegment['direction']>('direction')
+const distance = defineModel<number>('distance')
+const direction = defineModel<WallSegment['direction']>('direction')
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <UInput v-model="distance" />
-    <div>
-      <URadio v-model="direction" value="up">Up</URadio>
-      <URadio v-model="direction" value="down">Down</URadio>
-      <URadio v-model="direction" value="left">Left</URadio>
-      <URadio v-model="direction" value="right">Right</URadio>
+  <div
+    class="grid grid-cols-subgrid col-span-3 row-span-2 items-center gap-x-2"
+  >
+    <div class="col-span-1 place-items-end">
+      <slot name="left" />
+    </div>
+
+    <div class="grid grid-cols-subgrid row-span-2 gap-y-1">
+      <UInput v-model="distance" />
+
+      <div class="flex flex-row gap-2">
+        <div class="flex flex-row items-center gap-1">
+          <URadio v-model="direction" value="up" />
+          Up
+        </div>
+        <div class="flex flex-row items-center gap-1">
+          <URadio v-model="direction" value="down" />
+          Down
+        </div>
+        <div class="flex flex-row items-center gap-1">
+          <URadio v-model="direction" value="left" />
+          Left
+        </div>
+        <div class="flex flex-row items-center gap-1">
+          <URadio v-model="direction" value="right" />
+          Right
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-1">
+      <slot name="right" />
     </div>
   </div>
 </template>

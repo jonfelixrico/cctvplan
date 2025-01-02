@@ -1,3 +1,15 @@
+<script setup lang="ts">
+import { FloorPlan, type WallSegment } from '@cctvplan/components'
+
+const segments = ref<WallSegment[]>([])
+</script>
+
 <template>
-  <div>test</div>
+  <div class="w-dvw h-dvh flex flex-row gap-2">
+    <div class="grow">
+      <FloorPlan :segments="segments" />
+    </div>
+
+    <FloorPlanInputGroup v-model="segments" class="self-start" />
+  </div>
 </template>
