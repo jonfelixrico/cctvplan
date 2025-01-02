@@ -31,4 +31,13 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-12-29',
   modules: ['@nuxt/ui'],
+
+  components: {
+    dirs: [
+      {
+        path: '~/components',
+        pathPrefix: false,
+      },
+    ],
+  },
 })
