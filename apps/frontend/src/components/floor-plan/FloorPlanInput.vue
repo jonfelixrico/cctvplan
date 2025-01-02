@@ -14,7 +14,7 @@ const direction = defineModel<WallSegment['direction']>('direction')
     </div>
 
     <div class="grid grid-cols-subgrid row-span-2 gap-y-1">
-      <UInput v-model="distance" />
+      <UInput v-model.number="distance" type="number" />
 
       <div class="flex flex-row gap-2">
         <div class="flex flex-row items-center gap-1">
