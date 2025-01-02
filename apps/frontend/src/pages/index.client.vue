@@ -3,7 +3,7 @@ import { FloorPlan, type WallSegment } from '@cctvplan/components'
 import { useLocalStorage } from '@vueuse/core'
 
 const segments = useLocalStorage<WallSegment[]>('segments', [])
-const SCALE = 50
+const SCALE = 5
 const scaledSegments = computed(() =>
   segments.value.map(({ direction, distance }) => ({
     direction,
