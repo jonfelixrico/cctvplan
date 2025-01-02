@@ -166,6 +166,10 @@ importers:
         version: 2.2.0(typescript@5.6.3)
 
   apps/frontend:
+    dependencies:
+      '@cctvplan/components':
+        specifier: workspace:*
+        version: link:../../libs/components
     devDependencies:
       '@eslint/js':
         specifier: ^9.8.0

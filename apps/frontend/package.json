@@ -25,5 +25,8 @@
     "vue": "^3.3.4",
     "vue-router": "^4.2.4",
     "vue-tsc": "^2.0.0"
+  },
+  "dependencies": {
+    "@cctvplan/components": "workspace:*"
   }
 }
