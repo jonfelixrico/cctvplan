@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Point } from '@/utils/geom.types'
-
-interface Segment {
-  distance: number
-  color: string
-}
+import { DistanceSegment } from './types'
 
 const props = defineProps<{
-  segments: Segment[]
+  segments: DistanceSegment[]
   viewingAngle: number
   rotation: number
   origin: Point
