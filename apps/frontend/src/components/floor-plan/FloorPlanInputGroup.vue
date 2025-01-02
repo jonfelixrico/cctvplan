@@ -17,29 +17,18 @@ function setSegment(index: number, forPatch: Partial<WallSegment>) {
 }
 
 function addSegment() {
-  segments.value.push({ ...innerModel })
+  segments.value = [...segments.value, { ...innerModel }]
 }
 
 function removeSegment(index: number) {
-  segments.value.splice(index, 1)
+  const clone = [...segments.value]
+  clone.splice(index, 1)
+  segments.value = clone
 }
 </script>
 
 <template>
   <div class="grid grid-cols-[auto_1fr_auto] gap-y-3">
-    <FloorPlanInput
-      v-model:distance="innerModel.distance"
-      v-model:direction="innerModel.direction"
-    >
-      <template #right>
-        <UButton block @click="addSegment">Add</UButton>
-      </template>
-
-      <template #left>
-        <div>New</div>
-      </template>
-    </FloorPlanInput>
-
     <FloorPlanInput
       v-for="(segment, idx) of segments"
       :key="idx"
@@ -54,6 +43,19 @@ function removeSegment(index: number) {
 
       <template #right>
         <UButton block @click="removeSegment(idx)">Remove</UButton>
+      </template>
+    </FloorPlanInput>
+
+    <FloorPlanInput
+      v-model:distance="innerModel.distance"
+      v-model:direction="innerModel.direction"
+    >
+      <template #right>
+        <UButton block @click="addSegment">Add</UButton>
+      </template>
+
+      <template #left>
+        <div>New</div>
       </template>
     </FloorPlanInput>
   </div>
