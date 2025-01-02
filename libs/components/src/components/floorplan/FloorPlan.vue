@@ -1,14 +1,10 @@
 <script setup lang="ts">
+import { FloorSegment } from '@/components/floorplan/types'
 import { Point } from '@/utils/geom.types'
 import { computed } from 'vue'
 
-interface Segment {
-  direction: 'up' | 'down' | 'left' | 'right'
-  distance: number
-}
-
 const props = defineProps<{
-  segments: Segment[]
+  segments: FloorSegment[]
 }>()
 
 const points = computed(() => {
