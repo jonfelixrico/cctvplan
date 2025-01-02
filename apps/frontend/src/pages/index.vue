@@ -10,6 +10,8 @@ const segments = ref<WallSegment[]>([])
       <FloorPlan :segments="segments" />
     </div>
 
-    <FloorPlanInputGroup v-model="segments" class="self-start" />
+    <div class="flex flex-col justify-end">
+      <FloorPlanInputGroup v-model="segments" class="self-start" />
+    </div>
   </div>
 </template>
