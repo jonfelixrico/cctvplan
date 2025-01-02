@@ -3,9 +3,15 @@ import { WallSegment } from '@/components/floorplan/types'
 import { Point } from '@/utils/geom.types'
 import { computed } from 'vue'
 
-const props = defineProps<{
-  segments: WallSegment[]
-}>()
+const props = withDefaults(
+  defineProps<{
+    segments: WallSegment[]
+    strokeWidth: number
+  }>(),
+  {
+    strokeWidth: 1,
+  },
+)
 
 const points = computed(() => {
   const points: Point[] = []
@@ -44,9 +50,7 @@ const svgPaths = computed(() => {
   return commands.join(' ')
 })
 
-const STROKE = 2
-
-const viewBox = computed(() => {
+const viewBoxData = computed(() => {
   let xMin = 0
   let xMax = 0
   let yMin = 0
@@ -67,10 +71,10 @@ const viewBox = computed(() => {
     }
   }
 
-  return [
+  return {
     // x y
-    xMin - STROKE / 2,
-    yMin - STROKE / 2,
+    x: xMin - props.strokeWidth / 2,
+    y: yMin - props.strokeWidth / 2,
 
     /*
      * width height
@@ -78,14 +82,27 @@ const viewBox = computed(() => {
      * We're doing STROKE instead of STROKE / 2 since we have to compensate for the TL offset
      * that we've done above
      */
-    xMax - xMin + STROKE,
-    yMax - yMin + STROKE,
-  ].join(' ')
+    width: xMax - xMin + props.strokeWidth,
+    height: yMax - yMin + props.strokeWidth,
+  }
+})
+
+const viewBox = computed(() => {
+  const { x, y, width, height } = viewBoxData.value
+
+  return [x, y, width, height].join(' ')
 })
 </script>
 
 <template>
-  <svg :viewBox>
-    <path stroke="black" :stroke-width="STROKE" :d="svgPaths" fill="none" />
+  <svg :viewBox="viewBox">
+    <path
+      stroke="black"
+      :stroke-width="strokeWidth"
+      :d="svgPaths"
+      fill="none"
+      :width="viewBoxData.width"
+      :height="viewBoxData.height"
+    />
   </svg>
 </template>
