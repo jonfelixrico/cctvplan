@@ -62,5 +62,14 @@
         "staticStorybookTargetName": "static-storybook"
       }
     }
-  ]
+  ],
+  "targetDependencies": {
+    "build*": {
+      "dependsOn": ["^build"]
+    },
+
+    "serve*": {
+      "dependsOn": ["^build"]
+    }
+  }
 }
