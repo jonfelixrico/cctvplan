@@ -14,7 +14,7 @@ const scaledSegments = computed(() =>
 
 <template>
   <div class="w-dvw h-dvh flex flex-row gap-2">
-    <div class="grow overflow-auto">
+    <div class="grow overflow-auto p-20">
       <FloorPlan :segments="scaledSegments" />
     </div>
 
