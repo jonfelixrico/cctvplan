@@ -2,16 +2,7 @@
   "name": "@cctvplan/frontend",
   "version": "0.0.1",
   "private": true,
-  "nx": {
-    "name": "frontend",
-    "projectType": "application",
-    "sourceRoot": "apps/frontend/src"
-  },
   "devDependencies": {
-    "@eslint/js": "^9.8.0",
-    "@nuxt/devtools": "1.0.0",
-    "@nuxt/eslint-config": "~0.5.7",
-    "@nuxt/kit": "^3.10.0",
     "@nuxt/ui": "2.20.0",
     "@nuxt/ui-templates": "^1.3.1",
     "eslint": "^9.17.0",

@@ -1,0 +1,17 @@
+{
+  "name": "frontend",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/frontend/src",
+  "targets": {
+    "serve:deep": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx serve frontend",
+          "nx watch --projects=${projectName} --includeDependentProjects -- nx run-many -t build -p $NX_PROJECT_NAME --exclude=${projectName}"
+        ]
+      }
+    }
+  }
+}
